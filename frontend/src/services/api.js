@@ -20,16 +20,15 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Gestion centralisée des erreurs
-    if (error.response) {
-      // Erreur de la part du serveur
-      console.error('Erreur API:', error.response.data.message || error.response.statusText);
-    } else if (error.request) {
-      // Pas de réponse du serveur
-      console.error('Erreur réseau: Le serveur ne répond pas');
-    } else {
-      // Erreur de configuration
-      console.error('Erreur:', error.message);
+    // Gestion centralisée des erreurs (logging uniquement en développement)
+    if (process.env.NODE_ENV === 'development') {
+      if (error.response) {
+        console.error('Erreur API:', error.response.data.message || error.response.statusText);
+      } else if (error.request) {
+        console.error('Erreur réseau: Le serveur ne répond pas');
+      } else {
+        console.error('Erreur:', error.message);
+      }
     }
     return Promise.reject(error);
   }

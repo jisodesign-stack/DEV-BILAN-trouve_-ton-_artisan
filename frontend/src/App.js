@@ -37,7 +37,10 @@ function App() {
         const response = await getCategories();
         setCategories(response.data || []);
       } catch (error) {
-        console.error('Erreur lors du chargement des catégories:', error);
+        // Gestion silencieuse - les catégories seront vides
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Erreur lors du chargement des catégories:', error);
+        }
       } finally {
         setLoading(false);
       }
