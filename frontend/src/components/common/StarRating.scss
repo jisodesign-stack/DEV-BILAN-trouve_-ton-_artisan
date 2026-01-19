@@ -1,0 +1,45 @@
+// ============================================
+// Styles du composant StarRating
+// ============================================
+
+@use '../../styles/variables' as *;
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  &__star {
+    color: $color-star-empty;
+    transition: color 0.2s ease;
+
+    &--filled {
+      color: $color-star-filled;
+    }
+
+    &--half {
+      color: $color-star-filled;
+    }
+  }
+
+  &--sm {
+    .star-rating__star {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &--md {
+    .star-rating__star {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &--lg {
+    .star-rating__star {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

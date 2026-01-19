@@ -1,0 +1,228 @@
+// ============================================
+// Styles du composant Header
+// ============================================
+
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  background-color: $header-bg;
+  box-shadow: $header-shadow;
+
+  &__container {
+    @include container;
+    @include flex-between;
+    height: $header-height;
+    gap: $spacer-md;
+
+    @include media-max(lg) {
+      height: auto;
+      min-height: 70px;
+      flex-wrap: wrap;
+      padding-top: $spacer-sm;
+      padding-bottom: $spacer-sm;
+    }
+  }
+
+  // ===== LOGO =====
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacer-sm;
+    text-decoration: none;
+    flex-shrink: 0;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &-image {
+      height: 40px;
+      width: auto;
+
+      @include media-min(md) {
+        height: 50px;
+      }
+    }
+
+    &-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+
+      &-title {
+        font-size: 1.1rem;
+        font-weight: $font-weight-bold;
+        color: $color-dark;
+
+        @include media-min(md) {
+          font-size: 1.4rem;
+        }
+      }
+
+      &-subtitle {
+        font-size: 0.7rem;
+        color: $color-primary;
+        font-style: italic;
+
+        @include media-min(md) {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+
+  // ===== NAVIGATION =====
+  &__nav {
+    display: none;
+
+    @include media-min(lg) {
+      display: flex;
+      align-items: center;
+      gap: $spacer-lg;
+    }
+
+    &-list {
+      @include list-reset;
+      display: flex;
+      gap: $spacer-md;
+    }
+
+    &-item {
+      position: relative;
+    }
+
+    &-link {
+      display: block;
+      padding: $spacer-sm $spacer-md;
+      font-weight: $font-weight-medium;
+      color: $color-dark;
+      text-decoration: none;
+      border-radius: $border-radius;
+      transition: $transition-fast;
+
+      &:hover,
+      &--active {
+        color: $color-primary;
+        background-color: rgba($color-primary, 0.1);
+        text-decoration: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  // ===== BARRE DE RECHERCHE =====
+  &__search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 300px;
+
+    @include media-max(lg) {
+      max-width: none;
+      order: 3;
+      width: 100%;
+      margin-top: $spacer-sm;
+    }
+
+    &-form {
+      display: flex;
+      width: 100%;
+      position: relative;
+    }
+
+    &-input {
+      @include input-base;
+      padding-right: 40px;
+      border-radius: $border-radius-pill;
+    }
+
+    &-button {
+      position: absolute;
+      right: $spacer-xs;
+      top: 50%;
+      transform: translateY(-50%);
+      @include flex-center;
+      width: 32px;
+      height: 32px;
+      background-color: $color-primary;
+      border: none;
+      border-radius: 50%;
+      color: $color-white;
+      cursor: pointer;
+      transition: $transition-fast;
+
+      &:hover {
+        background-color: $color-secondary;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  // ===== MENU MOBILE =====
+  &__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-dark;
+
+    @include media-min(lg) {
+      display: none;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__mobile-nav {
+    display: none;
+    width: 100%;
+    order: 4;
+    padding: $spacer-md 0;
+    border-top: 1px solid $color-gray-200;
+
+    &--open {
+      display: block;
+    }
+
+    @include media-min(lg) {
+      display: none !important;
+    }
+
+    &-list {
+      @include list-reset;
+    }
+
+    &-link {
+      display: block;
+      padding: $spacer-sm 0;
+      font-weight: $font-weight-medium;
+      color: $color-dark;
+      text-decoration: none;
+      border-bottom: 1px solid $color-gray-100;
+
+      &:hover,
+      &--active {
+        color: $color-primary;
+      }
+    }
+  }
+}

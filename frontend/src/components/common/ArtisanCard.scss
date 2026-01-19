@@ -1,0 +1,132 @@
+// ============================================
+// Styles du composant ArtisanCard
+// ============================================
+
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.artisan-card {
+  @include card-hover;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
+  // ===== IMAGE =====
+  &__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 60%; // Ratio 5:3
+    overflow: hidden;
+    background-color: $color-gray-100;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+  }
+
+  // Badge catégorie
+  &__badge {
+    position: absolute;
+    top: $spacer-sm;
+    right: $spacer-sm;
+    padding: $spacer-xs $spacer-sm;
+    background-color: $color-primary;
+    color: $color-white;
+    font-size: 0.75rem;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-sm;
+    text-transform: uppercase;
+  }
+
+  // ===== CONTENU =====
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: $card-padding;
+  }
+
+  &__name {
+    margin: 0 0 $spacer-sm;
+    font-size: 1.1rem;
+    font-weight: $font-weight-bold;
+    color: $color-dark;
+    @include text-truncate(2);
+  }
+
+  &__specialty {
+    margin: 0 0 $spacer-sm;
+    font-size: 0.9rem;
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: $spacer-xs;
+    margin: 0 0 $spacer-md;
+    font-size: 0.85rem;
+    color: $color-gray-600;
+
+    svg {
+      flex-shrink: 0;
+      color: $color-accent-red;
+    }
+  }
+
+  // ===== RATING =====
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: $spacer-sm;
+    margin-top: auto;
+    padding-top: $spacer-md;
+    border-top: 1px solid $color-gray-100;
+  }
+
+  &__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  &__star {
+    color: $color-star-empty;
+
+    &--filled {
+      color: $color-star-filled;
+    }
+
+    &--half {
+      color: $color-star-filled;
+    }
+  }
+
+  &__score {
+    font-size: 0.875rem;
+    font-weight: $font-weight-semibold;
+    color: $color-dark;
+  }
+}

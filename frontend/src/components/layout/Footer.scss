@@ -1,0 +1,152 @@
+// ============================================
+// Styles du composant Footer
+// ============================================
+
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  background-color: $footer-bg;
+  color: $footer-color;
+  padding: $footer-padding-y 0;
+  margin-top: auto;
+
+  &__container {
+    @include container;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacer-xl;
+
+    @include media-min(md) {
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: $spacer-xxl;
+    }
+  }
+
+  // ===== SECTION LOGO ET CONTACT =====
+  &__brand {
+    &-title {
+      font-size: 1.25rem;
+      font-weight: $font-weight-bold;
+      color: $color-white;
+      margin-bottom: $spacer-md;
+    }
+
+    &-subtitle {
+      font-size: 0.9rem;
+      color: $color-primary;
+      margin-bottom: $spacer-lg;
+    }
+  }
+
+  &__contact {
+    &-title {
+      font-size: 0.9rem;
+      font-weight: $font-weight-semibold;
+      color: $color-white;
+      margin-bottom: $spacer-sm;
+    }
+
+    &-address {
+      font-style: normal;
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: $color-gray-400;
+    }
+
+    &-phone {
+      display: inline-block;
+      margin-top: $spacer-md;
+      color: $color-primary;
+      font-weight: $font-weight-medium;
+      text-decoration: none;
+      transition: $transition-fast;
+
+      &:hover {
+        color: lighten($color-primary, 15%);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // ===== SECTION LIENS LÉGAUX =====
+  &__legal {
+    &-title {
+      font-size: 1rem;
+      font-weight: $font-weight-semibold;
+      color: $color-white;
+      margin-bottom: $spacer-lg;
+    }
+
+    &-list {
+      @include list-reset;
+    }
+
+    &-item {
+      margin-bottom: $spacer-sm;
+    }
+
+    &-link {
+      color: $color-gray-400;
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: $transition-fast;
+
+      &:hover {
+        color: $color-white;
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  // ===== SECTION RÉGION =====
+  &__region {
+    &-title {
+      font-size: 1rem;
+      font-weight: $font-weight-semibold;
+      color: $color-white;
+      margin-bottom: $spacer-lg;
+    }
+
+    &-link {
+      display: inline-block;
+      padding: $spacer-sm $spacer-md;
+      background-color: rgba($color-white, 0.1);
+      color: $color-white;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border-radius: $border-radius;
+      transition: $transition-fast;
+
+      &:hover {
+        background-color: rgba($color-white, 0.2);
+        text-decoration: none;
+      }
+    }
+  }
+
+  // ===== COPYRIGHT =====
+  &__bottom {
+    margin-top: $spacer-xl;
+    padding-top: $spacer-lg;
+    border-top: 1px solid rgba($color-white, 0.1);
+  }
+
+  &__copyright {
+    font-size: 0.8rem;
+    color: $color-gray-500;
+    text-align: center;
+
+    @include media-min(md) {
+      text-align: left;
+    }
+  }
+}
