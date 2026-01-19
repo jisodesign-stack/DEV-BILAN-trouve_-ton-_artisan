@@ -136,6 +136,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: $spacer-lg;
+    min-height: 300px;
 
     @include media-min(sm) {
       grid-template-columns: repeat(2, 1fr);
@@ -168,6 +169,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: $spacer-md;
+    min-height: 200px;
 
     @include media-min(sm) {
       grid-template-columns: repeat(2, 1fr);

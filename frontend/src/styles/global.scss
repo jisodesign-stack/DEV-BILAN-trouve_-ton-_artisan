@@ -306,6 +306,7 @@ main {
 .loader {
   @include flex-center;
   padding: $spacer-xxl;
+  min-height: 200px;
 
   &__spinner {
     width: 48px;
@@ -315,6 +316,11 @@ main {
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
+}
+
+// Conteneur avec transition douce
+.content-fade {
+  animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes spin {

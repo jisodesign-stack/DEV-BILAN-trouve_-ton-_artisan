@@ -4,7 +4,7 @@
  * @module pages/ArtisanDetailPage
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FiMapPin, FiExternalLink, FiCheck } from 'react-icons/fi';
@@ -40,6 +40,7 @@ function ArtisanDetailPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Chargement de l'artisan
   useEffect(() => {
@@ -165,7 +166,7 @@ function ArtisanDetailPage() {
   // URL de l'image
   const imageUrl = artisan.image && artisan.image !== 'default-artisan.jpg'
     ? `${process.env.REACT_APP_API_URL?.replace('/api', '')}/uploads/${artisan.image}`
-    : '/images/default-artisan.jpg';
+    : '/images/default-artisan.svg';
 
   // Informations de la spécialité et catégorie
   const specialiteName = artisan.specialite?.nom || 'Artisan';
@@ -221,9 +222,14 @@ function ArtisanDetailPage() {
                   <img
                     src={imageUrl}
                     alt={artisan.nom}
-                    className="artisan-detail__image"
+                    className={`artisan-detail__image ${imageLoaded ? '' : 'artisan-detail__image--loading'}`}
+                    onLoad={() => setImageLoaded(true)}
                     onError={(e) => {
-                      e.target.src = '/images/default-artisan.jpg';
+                      if (!e.target.dataset.fallback) {
+                        e.target.dataset.fallback = 'true';
+                        e.target.src = '/images/default-artisan.svg';
+                      }
+                      setImageLoaded(true);
                     }}
                   />
                 </div>

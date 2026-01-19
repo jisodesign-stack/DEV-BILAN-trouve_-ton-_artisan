@@ -1,6 +1,7 @@
 /**
- * Page d'accueil
- * Présentation du service et des artisans du mois
+ * Page d'accueil du site Trouve ton artisan
+ * Affiche le hero, les étapes, les 3 artisans du mois et les catégories
+ * 
  * @module pages/HomePage
  */
 
@@ -8,19 +9,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FiHome, FiSettings, FiBox, FiShoppingBag } from 'react-icons/fi';
-
-// Composants
 import { ArtisanCard, Loader } from '../components/common';
-
-// Services
 import { getTopArtisans, getCategories } from '../services/api';
-
-// Styles
 import './HomePage.scss';
 
-/**
- * Icônes des catégories
- */
+// Mapping des icônes par slug de catégorie
 const categoryIcons = {
   batiment: FiHome,
   services: FiSettings,
@@ -28,9 +21,7 @@ const categoryIcons = {
   alimentation: FiShoppingBag
 };
 
-/**
- * Étapes pour trouver un artisan
- */
+// Configuration des étapes "Comment ça marche"
 const steps = [
   {
     number: 1,
@@ -54,36 +45,44 @@ const steps = [
   }
 ];
 
-/**
- * Page d'accueil du site
- * @returns {JSX.Element} La page d'accueil
- */
 function HomePage() {
   const [topArtisans, setTopArtisans] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Chargement des données
+  // Chargement parallèle des artisans du mois et des catégories (une seule fois)
   useEffect(() => {
+    let isMounted = true;
+    
     const fetchData = async () => {
       try {
-        setLoading(true);
         const [artisansResponse, categoriesResponse] = await Promise.all([
           getTopArtisans(),
           getCategories()
         ]);
-        setTopArtisans(artisansResponse.data || []);
-        setCategories(categoriesResponse.data || []);
+        
+        if (isMounted) {
+          setTopArtisans(artisansResponse.data || []);
+          setCategories(categoriesResponse.data || []);
+        }
       } catch (err) {
-        console.error('Erreur lors du chargement:', err);
-        setError('Impossible de charger les données. Veuillez réessayer.');
+        if (isMounted) {
+          console.error('Erreur lors du chargement:', err);
+          setError('Impossible de charger les données. Veuillez réessayer.');
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchData();
+    
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -97,7 +96,6 @@ function HomePage() {
       </Helmet>
 
       <div className="home">
-        {/* Hero Section */}
         <section className="home__hero" aria-labelledby="hero-title">
           <div className="container">
             <h1 id="hero-title" className="home__hero-title">
@@ -110,7 +108,6 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Section Comment ça marche */}
         <section className="home__steps" aria-labelledby="steps-title">
           <div className="container">
             <h2 id="steps-title" className="home__steps-title">
@@ -130,7 +127,6 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Section Top Artisans du mois */}
         <section className="home__top-artisans" aria-labelledby="top-artisans-title">
           <div className="container">
             <h2 id="top-artisans-title" className="home__top-artisans-title">
@@ -144,7 +140,7 @@ function HomePage() {
                 {error}
               </div>
             ) : topArtisans.length > 0 ? (
-              <div className="home__top-artisans-grid">
+              <div className="home__top-artisans-grid content-fade">
                 {topArtisans.map((artisan) => (
                   <ArtisanCard key={artisan.id} artisan={artisan} />
                 ))}
@@ -167,7 +163,7 @@ function HomePage() {
             {loading ? (
               <Loader message="Chargement des catégories..." />
             ) : (
-              <div className="home__categories-grid">
+              <div className="home__categories-grid content-fade">
                 {categories.map((category) => {
                   const IconComponent = categoryIcons[category.slug] || FiBox;
                   const artisansCount = category.specialites?.reduce(

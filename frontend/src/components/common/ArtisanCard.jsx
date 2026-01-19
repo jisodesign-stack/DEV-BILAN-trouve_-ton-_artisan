@@ -1,21 +1,18 @@
 /**
- * Composant ArtisanCard
  * Carte de présentation d'un artisan
+ * Affiche image, nom, spécialité, localisation et note
+ * 
  * @module components/common/ArtisanCard
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMapPin } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import './ArtisanCard.scss';
 
-/**
- * Génère les étoiles de notation
- * @param {number} rating - Note sur 5
- * @returns {JSX.Element[]} Tableau d'icônes d'étoiles
- */
+/** Génère les icônes d'étoiles selon la note (0-5) */
 const renderStars = (rating) => {
   const stars = [];
   const fullStars = Math.floor(rating);
@@ -52,31 +49,16 @@ const renderStars = (rating) => {
   return stars;
 };
 
-/**
- * Composant carte d'artisan
- * @param {Object} props - Propriétés du composant
- * @param {Object} props.artisan - Données de l'artisan
- * @returns {JSX.Element} Carte de l'artisan
- */
 function ArtisanCard({ artisan }) {
-  const {
-    id,
-    nom,
-    note,
-    localisation,
-    image,
-    specialite
-  } = artisan;
+  const { id, nom, note, localisation, image, specialite } = artisan;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // URL de l'image avec fallback
+  // Image avec fallback si absente ou par défaut
   const imageUrl = image && image !== 'default-artisan.jpg'
     ? `${process.env.REACT_APP_API_URL?.replace('/api', '')}/uploads/${image}`
-    : '/images/default-artisan.jpg';
+    : '/images/default-artisan.svg';
 
-  // Nom de la spécialité
   const specialiteName = specialite?.nom || 'Artisan';
-
-  // Nom de la catégorie
   const categorieName = specialite?.categorie?.nom || '';
 
   return (
@@ -85,15 +67,19 @@ function ArtisanCard({ artisan }) {
       className="artisan-card"
       aria-label={`Voir la fiche de ${nom}, ${specialiteName} à ${localisation}`}
     >
-      {/* Image */}
       <div className="artisan-card__image-wrapper">
         <img
           src={imageUrl}
           alt=""
-          className="artisan-card__image"
+          className={`artisan-card__image ${imageLoaded ? '' : 'artisan-card__image-loading'}`}
           loading="lazy"
+          onLoad={() => setImageLoaded(true)}
           onError={(e) => {
-            e.target.src = '/images/default-artisan.jpg';
+            if (!e.target.dataset.fallback) {
+              e.target.dataset.fallback = 'true';
+              e.target.src = '/images/default-artisan.svg';
+            }
+            setImageLoaded(true);
           }}
         />
         {categorieName && (
@@ -101,7 +87,6 @@ function ArtisanCard({ artisan }) {
         )}
       </div>
 
-      {/* Contenu */}
       <div className="artisan-card__content">
         <h3 className="artisan-card__name">{nom}</h3>
         <p className="artisan-card__specialty">{specialiteName}</p>
@@ -110,7 +95,6 @@ function ArtisanCard({ artisan }) {
           <span>{localisation}</span>
         </p>
 
-        {/* Rating */}
         <div className="artisan-card__rating">
           <div 
             className="artisan-card__stars" 
