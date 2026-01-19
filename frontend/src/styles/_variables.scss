@@ -1,0 +1,138 @@
+// ============================================
+// Variables SCSS personnalisées
+// Projet : Trouve ton artisan
+// Charte graphique région Auvergne-Rhône-Alpes
+// ============================================
+
+// ===== COULEURS DE LA CHARTE =====
+$color-light-blue: #f1f8fc;      // Fond clair
+$color-primary: #0074c7;          // Bleu principal
+$color-secondary: #00497c;        // Bleu foncé
+$color-dark: #384050;             // Gris foncé
+$color-accent-red: #cd2c2e;       // Rouge accent
+$color-accent-green: #82b864;     // Vert accent
+
+// ===== COULEURS ADDITIONNELLES =====
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray-100: #f8f9fa;
+$color-gray-200: #e9ecef;
+$color-gray-300: #dee2e6;
+$color-gray-400: #ced4da;
+$color-gray-500: #adb5bd;
+$color-gray-600: #6c757d;
+$color-gray-700: #495057;
+$color-gray-800: #343a40;
+$color-gray-900: #212529;
+
+// ===== COULEURS SÉMANTIQUES =====
+$color-success: $color-accent-green;
+$color-danger: $color-accent-red;
+$color-warning: #ffc107;
+$color-info: $color-primary;
+
+// ===== ÉTOILES DE NOTATION =====
+$color-star-filled: #ffc107;
+$color-star-empty: $color-gray-300;
+
+// ===== TYPOGRAPHIE =====
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-base: 1.6;
+$line-height-heading: 1.2;
+
+// ===== ESPACEMENT =====
+$spacer: 1rem;
+$spacer-xs: $spacer * 0.25;   // 4px
+$spacer-sm: $spacer * 0.5;    // 8px
+$spacer-md: $spacer;          // 16px
+$spacer-lg: $spacer * 1.5;    // 24px
+$spacer-xl: $spacer * 2;      // 32px
+$spacer-xxl: $spacer * 3;     // 48px
+
+// ===== BREAKPOINTS (Mobile First) =====
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// ===== BORDURES =====
+$border-radius-sm: 0.25rem;
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-pill: 50rem;
+
+$border-width: 1px;
+$border-color: $color-gray-200;
+
+// ===== OMBRES =====
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($color-black, 0.075);
+$box-shadow: 0 0.25rem 0.5rem rgba($color-black, 0.1);
+$box-shadow-lg: 0 0.5rem 1rem rgba($color-black, 0.15);
+$box-shadow-xl: 0 1rem 3rem rgba($color-black, 0.175);
+
+// ===== TRANSITIONS =====
+$transition-base: all 0.3s ease-in-out;
+$transition-fast: all 0.15s ease-in-out;
+$transition-slow: all 0.5s ease-in-out;
+
+// ===== Z-INDEX =====
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// ===== CONTENEURS =====
+$container-max-width: 1320px;
+$container-padding-x: $spacer-md;
+
+// ===== COMPOSANTS SPÉCIFIQUES =====
+
+// Header
+$header-height: 80px;
+$header-bg: $color-white;
+$header-shadow: $box-shadow-sm;
+
+// Footer
+$footer-bg: $color-dark;
+$footer-color: $color-white;
+$footer-padding-y: $spacer-xl;
+
+// Cards
+$card-bg: $color-white;
+$card-border-radius: $border-radius-lg;
+$card-shadow: $box-shadow;
+$card-hover-shadow: $box-shadow-lg;
+$card-padding: $spacer-lg;
+
+// Boutons
+$btn-padding-x: $spacer-lg;
+$btn-padding-y: $spacer-sm;
+$btn-border-radius: $border-radius;
+$btn-font-weight: $font-weight-semibold;
+
+// Formulaires
+$input-padding-x: $spacer-md;
+$input-padding-y: $spacer-sm;
+$input-border-radius: $border-radius;
+$input-border-color: $color-gray-300;
+$input-focus-border-color: $color-primary;
+$input-focus-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);

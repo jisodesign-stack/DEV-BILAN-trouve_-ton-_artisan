@@ -1,0 +1,254 @@
+// ============================================
+// Mixins SCSS réutilisables
+// Projet : Trouve ton artisan
+// ============================================
+
+@use 'variables' as *;
+
+// ===== MIXINS RESPONSIVE (Mobile First) =====
+
+/// Breakpoint minimum (min-width)
+/// @param {String} $breakpoint - Nom du breakpoint (sm, md, lg, xl, xxl)
+@mixin media-min($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == xxl {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+/// Breakpoint maximum (max-width)
+/// @param {String} $breakpoint - Nom du breakpoint
+@mixin media-max($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: #{$breakpoint-sm - 1}) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: #{$breakpoint-md - 1}) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: #{$breakpoint-lg - 1}) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: #{$breakpoint-xl - 1}) { @content; }
+  }
+}
+
+// ===== MIXINS FLEXBOX =====
+
+/// Centrage flexbox complet
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/// Flexbox avec espace entre les éléments
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/// Colonne flexbox
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ===== MIXINS TYPOGRAPHIE =====
+
+/// Titre principal
+@mixin heading-style {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-heading;
+  color: $color-dark;
+}
+
+/// Texte tronqué avec ellipse
+/// @param {Number} $lines - Nombre de lignes avant troncature
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// ===== MIXINS BOUTONS =====
+
+/// Style de base pour les boutons
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $btn-padding-y $btn-padding-x;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $btn-font-weight;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: $border-width solid transparent;
+  border-radius: $btn-border-radius;
+  transition: $transition-base;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
+/// Bouton primaire
+@mixin button-primary {
+  @include button-base;
+  background-color: $color-primary;
+  border-color: $color-primary;
+  color: $color-white;
+
+  &:hover:not(:disabled) {
+    background-color: $color-secondary;
+    border-color: $color-secondary;
+  }
+}
+
+/// Bouton secondaire (outline)
+@mixin button-outline {
+  @include button-base;
+  background-color: transparent;
+  border-color: $color-primary;
+  color: $color-primary;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+}
+
+// ===== MIXINS CARDS =====
+
+/// Style de base pour les cards
+@mixin card-base {
+  background-color: $card-bg;
+  border-radius: $card-border-radius;
+  box-shadow: $card-shadow;
+  transition: $transition-base;
+  overflow: hidden;
+}
+
+/// Card avec effet hover
+@mixin card-hover {
+  @include card-base;
+
+  &:hover {
+    box-shadow: $card-hover-shadow;
+    transform: translateY(-4px);
+  }
+}
+
+// ===== MIXINS FORMULAIRES =====
+
+/// Style de base pour les inputs
+@mixin input-base {
+  display: block;
+  width: 100%;
+  padding: $input-padding-y $input-padding-x;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: 1.5;
+  color: $color-dark;
+  background-color: $color-white;
+  background-clip: padding-box;
+  border: $border-width solid $input-border-color;
+  border-radius: $input-border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus {
+    color: $color-dark;
+    background-color: $color-white;
+    border-color: $input-focus-border-color;
+    outline: 0;
+    box-shadow: $input-focus-shadow;
+  }
+
+  &::placeholder {
+    color: $color-gray-500;
+    opacity: 1;
+  }
+
+  &:disabled {
+    background-color: $color-gray-100;
+    opacity: 1;
+  }
+}
+
+// ===== MIXINS ACCESSIBILITÉ =====
+
+/// Focus visible pour l'accessibilité
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+/// Masquer visuellement mais accessible aux lecteurs d'écran
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// ===== MIXINS UTILITAIRES =====
+
+/// Conteneur principal
+@mixin container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $container-padding-x;
+  padding-right: $container-padding-x;
+}
+
+/// Reset de liste
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/// Lien sans style par défaut
+@mixin link-reset {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+  }
+}
