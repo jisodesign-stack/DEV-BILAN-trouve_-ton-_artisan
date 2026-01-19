@@ -128,5 +128,3 @@ trouve-ton-artisan/
 Developpe dans le cadre du titre professionnel Developpeur Web.
 
 ---
-
-Region Auvergne-Rhone-Alpes - 2024
