@@ -37,11 +37,13 @@ exports.getAllArtisans = async (req, res) => {
       }]
     }];
 
-    // Filtre par nom
+    // Filtre par nom, spécialité ou description (a_propos)
     if (search) {
-      whereClause.nom = {
-        [Op.like]: `%${search}%`
-      };
+      whereClause[Op.or] = [
+        { nom: { [Op.like]: `%${search}%` } },
+        { a_propos: { [Op.like]: `%${search}%` } },
+        { '$specialite.nom$': { [Op.like]: `%${search}%` } }
+      ];
     }
 
     // Filtre par catégorie
@@ -57,7 +59,8 @@ exports.getAllArtisans = async (req, res) => {
       order: [['note', 'DESC'], ['nom', 'ASC']],
       limit,
       offset,
-      distinct: true
+      distinct: true,
+      subQuery: false
     });
 
     res.status(200).json({
@@ -177,9 +180,11 @@ exports.searchArtisans = async (req, res) => {
 
     const artisans = await Artisan.findAll({
       where: {
-        nom: {
-          [Op.like]: `%${query}%`
-        }
+        [Op.or]: [
+          { nom: { [Op.like]: `%${query}%` } },
+          { a_propos: { [Op.like]: `%${query}%` } },
+          { '$specialite.nom$': { [Op.like]: `%${query}%` } }
+        ]
       },
       include: [{
         model: Specialite,
