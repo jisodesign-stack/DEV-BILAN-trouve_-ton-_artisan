@@ -6,7 +6,7 @@ Plateforme web permettant aux particuliers de trouver et contacter des artisans 
 
 [Voir les maquettes sur Figma](https://www.figma.com/design/cIWMzWMWhwhUYBmtgqdak6/DEV-Trouve-ton-artisan)
 
-## 🛠 Technologies
+## Technologies
 
 | Couche | Technologies |
 |--------|-------------|
@@ -15,13 +15,13 @@ Plateforme web permettant aux particuliers de trouver et contacter des artisans 
 | **Base de données** | MySQL 8.0+ |
 | **Sécurité** | Helmet, CORS, express-rate-limit, express-validator, XSS |
 
-## 📋 Prérequis
+## Prérequis
 
 - Node.js 18+
 - MySQL 8.0+
 - Git
 
-## 🚀 Installation
+## Installation
 
 ```bash
 # Cloner le repository
@@ -39,7 +39,7 @@ npm install
 cp .env.example .env  # Configurer les variables
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Backend (.env)
 
@@ -70,7 +70,7 @@ mysql -u root -p < scripts/sql/create_database.sql
 mysql -u root -p < scripts/sql/seed_database.sql
 ```
 
-## ▶️ Lancement
+## Lancement
 
 ```bash
 # Terminal 1 - Backend
@@ -84,7 +84,7 @@ npm start
 # App sur http://localhost:3001
 ```
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 trouve-ton-artisan/
@@ -106,7 +106,7 @@ trouve-ton-artisan/
 └── README.md
 ```
 
-## 📡 API Endpoints
+## API Endpoints
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
@@ -120,7 +120,7 @@ trouve-ton-artisan/
 
 **Authentification** : Header `x-api-key` requis sur toutes les requêtes.
 
-## 🔒 Sécurité
+## Sécurité
 
 - **Headers HTTP** : Helmet.js (protection XSS, clickjacking, MIME sniffing)
 - **CORS** : Restriction des origines autorisées
@@ -129,7 +129,7 @@ trouve-ton-artisan/
 - **SQL Injection** : Requêtes préparées via Sequelize ORM
 - **Authentification API** : Clé API requise dans les headers
 
-## ♿ Accessibilité (WCAG 2.1)
+## Accessibilité (WCAG 2.1)
 
 - Navigation clavier avec focus visible
 - Labels de formulaires associés
@@ -138,7 +138,7 @@ trouve-ton-artisan/
 - Structure sémantique h1 > h2 > h3
 - Landmarks ARIA
 
-## 👤 Auteur
+## Auteur
 
 Développé dans le cadre du titre professionnel Développeur Web.
 
