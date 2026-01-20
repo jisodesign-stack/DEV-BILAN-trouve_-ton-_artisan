@@ -2,22 +2,23 @@
 
 Plateforme web permettant aux particuliers de trouver et contacter des artisans qualifiés en région Auvergne-Rhône-Alpes.
 
-## 🌐 Démo en ligne
+## � Maquettes Figma
 
-- **Frontend** : https://trouve-ton-artisan.up.railway.app
-- **Backend API** : https://dev-bilan-trouvetonartisan-production.up.railway.app/api
+[Voir les maquettes sur Figma](https://www.figma.com/design/cIWMzWMWhwhUYBmtgqdak6/DEV-Trouve-ton-artisan)
 
 ## 🛠 Technologies
 
-- **Frontend** : React 18.2, React Router 6, Bootstrap 5.3, Sass
-- **Backend** : Node.js 18+, Express 4.18, Sequelize 6.35
-- **Base de données** : MySQL 9.5
-- **Hébergement** : Railway
+| Couche | Technologies |
+|--------|-------------|
+| **Frontend** | React 18.2, React Router 6.20, Bootstrap 5.3, Sass, Axios |
+| **Backend** | Node.js 18+, Express 4.18, Sequelize 6.35 |
+| **Base de données** | MySQL 8.0+ |
+| **Sécurité** | Helmet, CORS, express-rate-limit, express-validator, XSS |
 
 ## 📋 Prérequis
 
 - Node.js 18+
-- MySQL 9.5
+- MySQL 8.0+
 - Git
 
 ## 🚀 Installation
@@ -121,12 +122,21 @@ trouve-ton-artisan/
 
 ## 🔒 Sécurité
 
-- Validation des entrées (express-validator)
-- Protection XSS (Helmet)
-- Protection SQL Injection (Sequelize ORM)
-- Rate Limiting
-- CORS configuré
-- Clé API obligatoire
+- **Headers HTTP** : Helmet.js (protection XSS, clickjacking, MIME sniffing)
+- **CORS** : Restriction des origines autorisées
+- **Rate Limiting** : 100 requêtes max par IP / 15 min
+- **Validation** : express-validator pour toutes les entrées
+- **SQL Injection** : Requêtes préparées via Sequelize ORM
+- **Authentification API** : Clé API requise dans les headers
+
+## ♿ Accessibilité (WCAG 2.1)
+
+- Navigation clavier avec focus visible
+- Labels de formulaires associés
+- Contrastes conformes WCAG AA
+- Attributs alt sur les images
+- Structure sémantique h1 > h2 > h3
+- Landmarks ARIA
 
 ## 👤 Auteur
 
